@@ -1,6 +1,6 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [post, setPost] = useState([]);
@@ -11,7 +11,7 @@ const Home = () => {
   let user = localStorage.getItem("username");
   let userid = localStorage.getItem("userid");
 
-  const handleDelete = (id,imageid) => {
+  const handleDelete = (id, imageid) => {
     axios
       .delete(`${window.location.origin}/${id}/${imageid}`, {
         headers: {
@@ -22,15 +22,13 @@ const Home = () => {
       .then((response) => response)
       .catch((err) => console.log(err));
   };
-  
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allpost")
+      .get(`${window.location.origin}/allpost`)
       .then((response) => {
         // console.log(response.status)
         setPost(response.data.mypost);
-       
       })
       .catch((err) => console.log(err));
   }, [handleDelete]);
@@ -61,47 +59,45 @@ const Home = () => {
           </nav>
         </header>
         <div id="animatelogout"> </div>
-     
-        {post.map((posts, key) => (
-        
-            <div  key={key}
-              className="card m-3 p-3  mx-auto mycard"
-              style={{ backgroundColor: "aqua" }}
-            >
-              <img
-                src={`http://localhost:5000/uploads/${posts.image}`}
-                width={"60%"}
-                height={"400px"}
-                className="mx-auto"
-              />
-              
-              <div className="card-title d-flex justify-content-between ">
-                <h2>{posts.title}</h2>
-                {posts.postedBy._id === userid ? (
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => handleDelete(posts._id,posts.image)}
-                  >
-                    delete
-                  </button>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="card-body">
-                <p>{posts.body}</p>
-              </div>
 
-              <div>
-                {posts.postedBy.name === user ? (
-                  <span className="span"> Your post</span>
-                ) : (
-                  <span className="span">
-                    Posted By : {posts.postedBy.name}
-                  </span>
-                )}
-              </div>
+        {post.map((posts, key) => (
+          <div
+            key={key}
+            className="card m-3 p-3  mx-auto mycard"
+            style={{ backgroundColor: "aqua" }}
+          >
+            <img
+              src={`http://localhost:5000/uploads/${posts.image}`}
+              width={"60%"}
+              height={"400px"}
+              className="mx-auto"
+            />
+
+            <div className="card-title d-flex justify-content-between ">
+              <h2>{posts.title}</h2>
+              {posts.postedBy._id === userid ? (
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleDelete(posts._id, posts.image)}
+                >
+                  delete
+                </button>
+              ) : (
+                ""
+              )}
             </div>
+            <div className="card-body">
+              <p>{posts.body}</p>
+            </div>
+
+            <div>
+              {posts.postedBy.name === user ? (
+                <span className="span"> Your post</span>
+              ) : (
+                <span className="span">Posted By : {posts.postedBy.name}</span>
+              )}
+            </div>
+          </div>
         ))}
       </div>
     );
