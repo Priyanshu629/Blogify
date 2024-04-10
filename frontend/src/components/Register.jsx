@@ -1,38 +1,32 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [err,setErr]=useState('')
+  const [err, setErr] = useState("");
 
- async function handleForm() {
+  async function handleForm() {
     if (!name || !email || !password) {
       alert("all the fileds required");
-
     }
-    try{
-        let response=await fetch('http://localhost:5000/register',{
-          method:"post",
-          body:JSON.stringify(name,email,password)
-        })
+    try {
+      let response = await fetch(`${window.location.origin}/register`, {
+        method: "post",
+        body: JSON.stringify(name, email, password),
+      });
 
-        if(response.status==422){
-          return alert('user already exist')
-        }
-        else{
-          window.location.replace("/login")
-        }
+      if (response.status == 422) {
+        return alert("user already exist");
+      } else {
+        window.location.replace("/login");
       }
-      catch(error){
-        if(error.response && error.response.status===422){
-         setErr('User already exist')
-        
-        }
+    } catch (error) {
+      if (error.response && error.response.status === 422) {
+        setErr("User already exist");
       }
-       
+    }
   }
 
   return (

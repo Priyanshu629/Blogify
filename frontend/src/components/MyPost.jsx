@@ -14,7 +14,7 @@ const MyPost = () => {
     //getting data
     useEffect(()=>{
 
-        axios.get('/getpost',{
+        axios.get(`${window.location.origin}/getpost`,{
             headers:{
                 "Content-Type":"application/json",
                 "token":token

@@ -35,7 +35,7 @@ const Createpost = () => {
     
     axios
       .post(
-        "/createpost",
+        `${window.location.origin}/createpost`,
         formdata,
         {
           headers: {

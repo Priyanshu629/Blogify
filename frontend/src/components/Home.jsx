@@ -13,7 +13,7 @@ const Home = () => {
 
   const handleDelete = (id,imageid) => {
     axios
-      .delete(`http://localhost:5000/deletepost/${id}/${imageid}`, {
+      .delete(`${window.location.origin}/${id}/${imageid}`, {
         headers: {
           "Content-Type": "application/json",
           token: token,

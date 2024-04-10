@@ -14,7 +14,7 @@ const Login = () => {
      return alert('all the fileds required')
     }
    
-    axios.post(`http://localhost:5000/login`,{name,password},
+    axios.post(`${window.location.origin}/login`,{name,password},
     
    {
     headers:{
