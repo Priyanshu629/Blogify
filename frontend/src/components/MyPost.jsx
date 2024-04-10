@@ -10,7 +10,7 @@ const MyPost = () => {
     const navigate = useNavigate();
     
     
- 
+     console.log(post.image)
     //getting data
     useEffect(()=>{
 

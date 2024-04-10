@@ -8,7 +8,7 @@ const {createPost,getMyPost,deletePost,allPost,getMyPostById}=require('../contro
 
 router.get('/getpost',isLoggedIn,getMyPost)
 router.get('/getpost/:id',getMyPostById)
-router.delete('/deletepost/:id/uploads/:imageid',isLoggedIn,deletePost)
+router.delete('/deletepost/:id/:imageid',isLoggedIn,deletePost)
 router.get('/allpost',allPost)
 
 module.exports=router
