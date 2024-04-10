@@ -67,7 +67,7 @@ const Home = () => {
             style={{ backgroundColor: "aqua" }}
           >
             <img
-              src={`${window.location.origin}/uploads/${posts.image}`}
+              src={`/${posts.image}`}
               width={"60%"}
               height={"400px"}
               className="mx-auto"
